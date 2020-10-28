@@ -11,11 +11,16 @@
             console.log("Connected");
         });
         myFunction = function(){
-            socket.emit('pressed');
+            socket.emit('pressed', document.getElementById("myText").value);
         }
+        socket.on('Temp', (temp) => {
+            document.getElementById("content").innerHTML = temp;
+        });
     </script>
 </head>
 <body>
+    <input type="text" id="myText" value="">
     <button onclick="myFunction()">Click me</button>
+    <div id = "content"></div>
 </body>
 </html>

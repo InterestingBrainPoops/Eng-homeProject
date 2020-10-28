@@ -14,9 +14,9 @@ http.listen(3000, () => {
 });
 io.on('connect', socket => {
   console.log(socket.id);
-  socket.on('pressed', ()=>{
-    console.log("press");
-    exec("python ButtonPress.py", (error, stdout, stderr) => {
+  socket.on('pressed', (text)=>{
+    console.log(`${text}, and button got pressssssssssssed`);
+    exec("/opt/vc/bin/vcgencmd measure_temp", (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -24,9 +24,9 @@ io.on('connect', socket => {
     if (stderr) {
         console.log(`stderr: ${stderr}`);
         return;
-    }
+    } 
     console.log(`stdout: ${stdout}`);
-
+    socket.emit("Temp", stdout);
     });
   });
 });
