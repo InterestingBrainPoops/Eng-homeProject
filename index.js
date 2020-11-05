@@ -16,7 +16,7 @@ io.on('connect', socket => {
   console.log(socket.id);
   socket.on('pressed', (text)=>{
     console.log(`${text}, and button got pressssssssssssed`);
-    exec("/opt/vc/bin/vcgencmd measure_temp", (error, stdout, stderr) => {
+    exec("python ButtonPress.py", (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
         return;
